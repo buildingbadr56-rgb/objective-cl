@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Objective Placement Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- ══ SUPABASE CONFIG ══ -->
+<script>
+const SUPABASE_URL = 'https://ttipcnfsrtqxeajbpqmi.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_rGVyhgGNshzw_K2We592kQ_e0lH1lP_';
+const TABLE = 'quiz_responses';
+
+const LOGO_DATA_URI = 'data:image/jpeg;base64,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';
+
+// ══════════════════════════════════════════════════════════
+//  ✏️ EXAM CONFIG — edit these for a new exam
+// ══════════════════════════════════════════════════════════
+const QUIZ_CONFIG = {
+  title:        'Objective Placement Test',
+  subtitle:     'English Language Proficiency Assessment',
+  organization: 'Egyptian Tax Authority',
+  admin_pass:   'Admin123456',
+  quiz_code:    'ENG_PLACEMENT_A',
+  audio_url:    'listening_audio.mp3',   // place this file next to the HTML
+  scoring: { correct: 1, wrong: 0 }
+};
+
+const PLACEMENT_SCALE = [
+  { min:1, max:5, rating:1, placement:'New Interchange Intro, first half' },
+  { min:6, max:11, rating:2, placement:'New Interchange Intro, second half' },
+  { min:12, max:17, rating:3, placement:'New Interchange Level 1, first half' },
+  { min:18, max:23, rating:4, placement:'New Interchange Level 1, second half' },
+  { min:24, max:30, rating:5, placement:'New Interchange Level 2, first half' },
+  { min:31, max:36, rating:6, placement:'New Interchange Level 2, second half' },
+  { min:37, max:42, rating:7, placement:'New Interchange Level 3, first half' },
+  { min:43, max:49, rating:8, placement:'New Interchange Level 3, second half' },
+  { min:50, max:55, rating:9, placement:'Passages Level 1, first half' },
+  { min:56, max:61, rating:10, placement:'Passages Level 1, second half' },
+  { min:62, max:68, rating:11, placement:'Passages Level 2, first half' },
+  { min:69, max:70, rating:12, placement:'Passages Level 2, second half' },
+];
+
+// ══ QUESTION BANK ══
+const Q_LISTENING = [
+  { s:'listen', situation:'David is talking with Tomomi when Monica comes into the room.', q:'_____ are meeting for the first time.', c:['David and Monica','David and Tomomi','Tomomi and Monica','David, Monica, and Tomomi'], a:'Tomomi and Monica' },
+  { s:'listen', situation:'Ken and Nancy are at a restaurant.', q:'Ken _____.', c:['is having steak tonight','stopped eating steak','eats steak a lot','prefers chicken to steak'], a:'eats steak a lot' },
+  { s:'listen', situation:'Karen calls Jason\'s home. Jason\'s father answers the telephone.', q:'Karen is going to _____.', c:['speak with Jason at work','call back in an hour','wait for Jason to call','send a written message'], a:'wait for Jason to call' },
+  { s:'listen', situation:'A reporter is giving today\'s weather forecast.', q:'It will be clear in _____.', c:['the Northeast','Seattle','Boston','Miami'], a:'Miami' },
+  { s:'listen', situation:'A reporter is giving today\'s weather forecast.', q:'In Seattle, the weather is _____.', c:['hot','snowy','cool','rainy'], a:'cool' },
+  { s:'listen', situation:'Bill invites Jennifer to go to dinner and a movie.', q:'They\'re going to _____.', c:['leave work a little early','go to the movie before dinner','see the movie tomorrow','have dinner at 7:00'], a:'go to the movie before dinner' },
+  { s:'listen', situation:'Bill invites Jennifer to go to dinner and a movie.', q:'Jennifer doesn\'t accept right away because she can\'t _____.', c:['eat a late lunch','leave work early','go to dinner','see the movie'], a:'leave work early' },
+  { s:'listen', situation:'Linda is asking Jim about his plans for the summer.', q:'In the summer, Jim usually _____.', c:['stays in the mountains','takes trips with his family','visits his parents','goes to the beach'], a:'goes to the beach' },
+  { s:'listen', situation:'Linda is asking Jim about his plans for the summer.', q:'This summer he\'s planning to _____.', c:['stay at home','go to the beach','fish with his dad','hike in the mountains'], a:'hike in the mountains' },
+  { s:'listen', situation:'Phil is talking with Susie about money.', q:'Phil is upset because _____.', c:['Susie can\'t lend him any money','his parents won\'t give him money','Albert hasn\'t returned his money','his friends never lend him money'], a:'Albert hasn\'t returned his money' },
+  { s:'listen', situation:'Phil is talking with Susie about money.', q:'Albert _____.', c:['didn\'t borrow $100','isn\'t working now','doesn\'t need the money','can\'t return the money yet'], a:'can\'t return the money yet' },
+  { s:'listen', situation:'Phil is talking with Susie about money.', q:'Susie doesn\'t lend money to friends because _____.', c:['she has just enough for herself','lending money can change a friendship','people won\'t lend her money','her friends don\'t need it'], a:'lending money can change a friendship' },
+  { s:'listen', situation:'Natalie and Chuck are talking about their experiences abroad.', q:'Chuck went backpacking _____.', c:['in Brazil','by himself','after high school','with his father'], a:'after high school' },
+  { s:'listen', situation:'Natalie and Chuck are talking about their experiences abroad.', q:'Chuck says he "would have liked to have seen Portugal." He means that he _____.', c:['went there, and he liked it','didn\'t go there, but he wanted to','went there, but he didn\'t like it','didn\'t go there, and he didn\'t want to'], a:'didn\'t go there, but he wanted to' },
+  { s:'listen', situation:'Natalie and Chuck are talking about their experiences abroad.', q:'While Natalie was in Japan, she _____.', c:['traveled all over the country','lived with a Japanese family','learned Japanese quickly','got very homesick'], a:'lived with a Japanese family' },
+  { s:'listen', situation:'Natalie and Chuck are talking about their experiences abroad.', q:'Chuck doesn\'t want to _____.', c:['travel anymore','learn a foreign language','stay at home','live abroad'], a:'live abroad' },
+  { s:'listen', situation:'Diane and Conrad are talking about their careers.', q:'Conrad got into advertising because he _____.', c:['studied advertising in college','heard about a job opening','liked to help people','was tired of his old job'], a:'heard about a job opening' },
+  { s:'listen', situation:'Diane and Conrad are talking about their careers.', q:'When he was young, Conrad wanted to _____.', c:['work in advertising','become a doctor','stay in school','go into business'], a:'become a doctor' },
+  { s:'listen', situation:'Diane and Conrad are talking about their careers.', q:'Diane\'s parents didn\'t want her to _____.', c:['start her own business','finish college','be too successful','change her career'], a:'start her own business' },
+  { s:'listen', situation:'Diane and Conrad are talking about their careers.', q:'Conrad _____.', c:['owns his own company','enjoys working in advertising','thinks his job is boring','wants to leave his job'], a:'enjoys working in advertising' },
+];
+
+const Q_READING = [
+  { s:'read', passageTitle:'What are you doing today?', passage:'BETTY CHAN: I usually stay home on Sundays and take it easy – read, clean the house, do stuff like that. But today I\'m at the mall. I\'m buying some things for my kids.', q:'Betty\'s _____ today.', c:['shopping','reading','cleaning','resting'], a:'shopping' },
+  { s:'read', passageTitle:'What do you do?', passage:'TONY PEREZ: I\'m a flight attendant with a major airline. Flying isn\'t dangerous, but it can be stressful. When I\'m up in the air working, I always have something to do. I like it because I meet a lot of interesting people.', q:'Tony\'s job is _____.', c:['busy','easy','relaxing','boring'], a:'busy' },
+  { s:'read', passageTitle:'A vacation postcard', passage:'Dear Sal, Greetings from France – it\'s so good to be back here again! We left the kids with their grandparents in Chicago, and we\'re biking across the French countryside by ourselves. We brought a tent and sleeping bags, so we can camp out if we want to, but we\'re really enjoying the small hotels we find along the way. Love, Michael and Paula', q:'Michael and Paula _____.', c:['have been to France before','took their children with them','are visiting their grandparents','prefer to sleep outside'], a:'have been to France before' },
+  { s:'read', passageTitle:'The "zone"', passage:'You\'re deeply involved in a task and can ignore everything around you – ringing telephones, your neighbor\'s TV, even your own hunger – and still do things in record time. This is similar to what athletes call the "zone": the power to concentrate so hard that you can ignore everything else. This ability can bring success in any field, but in athletics it can mean all the difference between winning and losing a game or event.', q:'In this reading, the "zone" refers to a person\'s _____.', c:['state of mind','neighborhood','physical condition','intelligence'], a:'state of mind' },
+  { s:'read', passageTitle:'The "zone"', passage:'You\'re deeply involved in a task and can ignore everything around you – ringing telephones, your neighbor\'s TV, even your own hunger – and still do things in record time. This is similar to what athletes call the "zone": the power to concentrate so hard that you can ignore everything else. This ability can bring success in any field, but in athletics it can mean all the difference between winning and losing a game or event.', q:'Athletes in the "zone" are more likely to _____.', c:['fall','compete','win','relax'], a:'win' },
+  { s:'read', passageTitle:'Henry Ford and the Model-T', passage:'Henry Ford became famous and rich because he found a better, faster way to build cars. This is shown in the history of the Model-T. When the Model-T was first introduced in 1908, it took 14 hours to build and cost $850. After Ford introduced into his own factory the mass-production techniques that he saw in a meat-packing plant, the time for building a Model-T was reduced to less than two hours. As a result, Ford was able to drop the price of the car to $265. By 1927, he had sold over 15 million Model-Ts.', q:'The first Model-T was expensive because it _____.', c:['was new','was very popular','took a long time to build','was built in a factory'], a:'took a long time to build' },
+  { s:'read', passageTitle:'Henry Ford and the Model-T', passage:'Henry Ford became famous and rich because he found a better, faster way to build cars. This is shown in the history of the Model-T. When the Model-T was first introduced in 1908, it took 14 hours to build and cost $850. After Ford introduced into his own factory the mass-production techniques that he saw in a meat-packing plant, the time for building a Model-T was reduced to less than two hours. As a result, Ford was able to drop the price of the car to $265. By 1927, he had sold over 15 million Model-Ts.', q:'The Model-T became so popular because it was _____ than other cars.', c:['newer','faster','better','cheaper'], a:'cheaper' },
+  { s:'read', passageTitle:'It\'s a big country!', passage:'When it comes to body weight, Americans stand out. Most visitors to the United States, no matter where they go across this vast country, comment on the size of many Americans. In fact, these impressions are backed by numerous statistics. For example, the average 5\'4" American weighs 162 pounds, or 15 pounds more than the average person of the same height from Western or Central Europe. Another comparison: At 150 pounds, the average 5\'4" American woman is 24 pounds heavier than her Japanese counterpart. Why are Americans so heavy? Some blame the American diet. Certainly it\'s true that Americans eat more high-fat foods – meat, dairy products, and processed food – and fewer grains and vegetables than people in other countries. But fat isn\'t the whole story. Lifestyle factors – including the tendency for Americans to drive rather than walk or ride a bicycle to work, to snack throughout the day, and to have so many labor-saving devices in the home – appear to contribute to the problem.', q:'According to the article, visitors to the United States often comment on the size of the _____.', c:['population','cities','country','people'], a:'people' },
+  { s:'read', passageTitle:'It\'s a big country!', passage:'When it comes to body weight, Americans stand out. Most visitors to the United States, no matter where they go across this vast country, comment on the size of many Americans. In fact, these impressions are backed by numerous statistics. For example, the average 5\'4" American weighs 162 pounds, or 15 pounds more than the average person of the same height from Western or Central Europe. Another comparison: At 150 pounds, the average 5\'4" American woman is 24 pounds heavier than her Japanese counterpart. Why are Americans so heavy? Some blame the American diet. Certainly it\'s true that Americans eat more high-fat foods – meat, dairy products, and processed food – and fewer grains and vegetables than people in other countries. But fat isn\'t the whole story. Lifestyle factors – including the tendency for Americans to drive rather than walk or ride a bicycle to work, to snack throughout the day, and to have so many labor-saving devices in the home – appear to contribute to the problem.', q:'According to the article, the average Western European weighs _____.', c:['more than an American','more than a Central European','less than an American','less than a Japanese person'], a:'less than an American' },
+  { s:'read', passageTitle:'It\'s a big country!', passage:'When it comes to body weight, Americans stand out. Most visitors to the United States, no matter where they go across this vast country, comment on the size of many Americans. In fact, these impressions are backed by numerous statistics. For example, the average 5\'4" American weighs 162 pounds, or 15 pounds more than the average person of the same height from Western or Central Europe. Another comparison: At 150 pounds, the average 5\'4" American woman is 24 pounds heavier than her Japanese counterpart. Why are Americans so heavy? Some blame the American diet. Certainly it\'s true that Americans eat more high-fat foods – meat, dairy products, and processed food – and fewer grains and vegetables than people in other countries. But fat isn\'t the whole story. Lifestyle factors – including the tendency for Americans to drive rather than walk or ride a bicycle to work, to snack throughout the day, and to have so many labor-saving devices in the home – appear to contribute to the problem.', q:'In comparison with Americans, people in other countries eat more _____.', c:['meat','dairy products','processed food','grains'], a:'grains' },
+  { s:'read', passageTitle:'It\'s a big country!', passage:'When it comes to body weight, Americans stand out. Most visitors to the United States, no matter where they go across this vast country, comment on the size of many Americans. In fact, these impressions are backed by numerous statistics. For example, the average 5\'4" American weighs 162 pounds, or 15 pounds more than the average person of the same height from Western or Central Europe. Another comparison: At 150 pounds, the average 5\'4" American woman is 24 pounds heavier than her Japanese counterpart. Why are Americans so heavy? Some blame the American diet. Certainly it\'s true that Americans eat more high-fat foods – meat, dairy products, and processed food – and fewer grains and vegetables than people in other countries. But fat isn\'t the whole story. Lifestyle factors – including the tendency for Americans to drive rather than walk or ride a bicycle to work, to snack throughout the day, and to have so many labor-saving devices in the home – appear to contribute to the problem.', q:'The article implies that Americans would lose weight if they _____.', c:['snacked more often','rode bicycles to work','stayed at home more','ate fewer vegetables'], a:'rode bicycles to work' },
+  { s:'read', passageTitle:'Small talk isn\'t so "small"', passage:'Small talk may not be about serious issues; nevertheless, researchers into the subject have concluded that it\'s important. That\'s because small talk keeps us connected to one another and can lead to bigger things, such as a job or a new friendship. Yet people who find themselves alone with another person often don\'t know what to say. Here are a few tips to help you start a conversation, and to keep the conversational ball rolling: Start with the obvious. If you have something in common with another person (your job, hobbies, a person you both know, etc.), begin with that. If you don\'t know the person, it\'s always acceptable to bring up a neutral topic such as the weather or a recent news event. It isn\'t necessary to be clever – all that\'s required is to show interest in the other person and to be willing to talk. Compliment where appropriate. If the other person has done something you like or is wearing something attractive, it\'s always appropriate to compliment. But avoid talking about the specifics of a person\'s physical appearance (people can\'t usually change how they look) and keep your compliments short and to the point. Talk about yourself – then return to your partner. It\'s perfectly OK to talk about your own interests for a while, but keep conversation from becoming a monolog.It\'s only polite, for example, that after talking about your own children, you turn the conversation back to your partner by asking about his or her children.', q:'According to the article, the main function of small talk is to _____.', c:['show our own importance','get valuable information','relate to other people','talk about major issues'], a:'relate to other people' },
+  { s:'read', passageTitle:'Small talk isn\'t so "small"', passage:'Small talk may not be about serious issues; nevertheless, researchers into the subject have concluded that it\'s important. That\'s because small talk keeps us connected to one another and can lead to bigger things, such as a job or a new friendship. Yet people who find themselves alone with another person often don\'t know what to say. Here are a few tips to help you start a conversation, and to keep the conversational ball rolling: Start with the obvious. If you have something in common with another person (your job, hobbies, a person you both know, etc.), begin with that. If you don\'t know the person, it\'s always acceptable to bring up a neutral topic such as the weather or a recent news event. It isn\'t necessary to be clever – all that\'s required is to show interest in the other person and to be willing to talk. Compliment where appropriate. If the other person has done something you like or is wearing something attractive, it\'s always appropriate to compliment. But avoid talking about the specifics of a person\'s physical appearance (people can\'t usually change how they look) and keep your compliments short and to the point. Talk about yourself – then return to your partner. It\'s perfectly OK to talk about your own interests for a while, but keep conversation from becoming a monolog.It\'s only polite, for example, that after talking about your own children, you turn the conversation back to your partner by asking about his or her children.', q:'"Start with the obvious" means that you should talk about things that you _____.', c:['have in common','enjoy doing','want to understand','know everything about'], a:'have in common' },
+  { s:'read', passageTitle:'Small talk isn\'t so "small"', passage:'Small talk may not be about serious issues; nevertheless, researchers into the subject have concluded that it\'s important. That\'s because small talk keeps us connected to one another and can lead to bigger things, such as a job or a new friendship. Yet people who find themselves alone with another person often don\'t know what to say. Here are a few tips to help you start a conversation, and to keep the conversational ball rolling: Start with the obvious. If you have something in common with another person (your job, hobbies, a person you both know, etc.), begin with that. If you don\'t know the person, it\'s always acceptable to bring up a neutral topic such as the weather or a recent news event. It isn\'t necessary to be clever – all that\'s required is to show interest in the other person and to be willing to talk. Compliment where appropriate. If the other person has done something you like or is wearing something attractive, it\'s always appropriate to compliment. But avoid talking about the specifics of a person\'s physical appearance (people can\'t usually change how they look) and keep your compliments short and to the point. Talk about yourself – then return to your partner. It\'s perfectly OK to talk about your own interests for a while, but keep conversation from becoming a monolog.It\'s only polite, for example, that after talking about your own children, you turn the conversation back to your partner by asking about his or her children.', q:'You need to be careful when complimenting someone because most people _____.', c:['don\'t like compliments','can\'t change how they look','don\'t dress very well','haven\'t done anything interesting'], a:'can\'t change how they look' },
+  { s:'read', passageTitle:'Small talk isn\'t so "small"', passage:'Small talk may not be about serious issues; nevertheless, researchers into the subject have concluded that it\'s important. That\'s because small talk keeps us connected to one another and can lead to bigger things, such as a job or a new friendship. Yet people who find themselves alone with another person often don\'t know what to say. Here are a few tips to help you start a conversation, and to keep the conversational ball rolling: Start with the obvious. If you have something in common with another person (your job, hobbies, a person you both know, etc.), begin with that. If you don\'t know the person, it\'s always acceptable to bring up a neutral topic such as the weather or a recent news event. It isn\'t necessary to be clever – all that\'s required is to show interest in the other person and to be willing to talk. Compliment where appropriate. If the other person has done something you like or is wearing something attractive, it\'s always appropriate to compliment. But avoid talking about the specifics of a person\'s physical appearance (people can\'t usually change how they look) and keep your compliments short and to the point. Talk about yourself – then return to your partner. It\'s perfectly OK to talk about your own interests for a while, but keep conversation from becoming a monolog.It\'s only polite, for example, that after talking about your own children, you turn the conversation back to your partner by asking about his or her children.', q:'You should avoid monologs because other people _____.', c:['have no interest in what you say','already know a lot about you','like to talk about themselves, too','prefer to discuss neutral subjects'], a:'like to talk about themselves, too' },
+  { s:'read', passageTitle:'Headaches', passage:'Everyone has experienced headaches, but only recently have medical researchers begun to learn more specifically about the causes and possible treatments for different types of headache pain. The most common type of headache is the simple tension headache. Tension headaches are usually mild and short-lasting and can result from various factors, such as stress caused by worry or noise. Tension headaches are caused by a tightening of the neck or back muscles, which slows the flow of blood and, therefore, oxygen to the brain. It is the lack of oxygen that causes the pain. Most headaches can be relieved by taking a mild analgesic such as aspirin. Analgesics expand the blood vessels and restore the normal flow of blood and oxygen to the brain. A more serious type of headache is the migraine. Migraine headaches are often extremely painful and can last for hours or days. Like tension headaches, they can be the result of different factors, including stress, hormonal changes, and allergies. Unlike tension headaches, however, they are caused by an abnormal expansion or swelling (rather than a contraction) of the blood vessels within the head. Medicines that shrink swollen blood vessels can be used to treat migraine headaches. A tiny minority of headaches can be linked to severe physical problems such as head injury or brain tumors. For these types of headaches, there are medicines to treat the symptoms, but there is no cure unless the underlying problem is removed.', q:'This article discusses the _____.', c:['tiny minority of people who have headaches','history of medical research into headaches','causes and remedies for headaches','physical problems caused by headaches'], a:'causes and remedies for headaches' },
+  { s:'read', passageTitle:'Headaches', passage:'Everyone has experienced headaches, but only recently have medical researchers begun to learn more specifically about the causes and possible treatments for different types of headache pain. The most common type of headache is the simple tension headache. Tension headaches are usually mild and short-lasting and can result from various factors, such as stress caused by worry or noise. Tension headaches are caused by a tightening of the neck or back muscles, which slows the flow of blood and, therefore, oxygen to the brain. It is the lack of oxygen that causes the pain. Most headaches can be relieved by taking a mild analgesic such as aspirin. Analgesics expand the blood vessels and restore the normal flow of blood and oxygen to the brain. A more serious type of headache is the migraine. Migraine headaches are often extremely painful and can last for hours or days. Like tension headaches, they can be the result of different factors, including stress, hormonal changes, and allergies. Unlike tension headaches, however, they are caused by an abnormal expansion or swelling (rather than a contraction) of the blood vessels within the head. Medicines that shrink swollen blood vessels can be used to treat migraine headaches. A tiny minority of headaches can be linked to severe physical problems such as head injury or brain tumors. For these types of headaches, there are medicines to treat the symptoms, but there is no cure unless the underlying problem is removed.', q:'A tension headache can result when _____.', c:['the neck and back muscles relax','people get injured in an accident','the flow of blood is restricted','too much oxygen goes to the brain'], a:'the flow of blood is restricted' },
+  { s:'read', passageTitle:'Headaches', passage:'Everyone has experienced headaches, but only recently have medical researchers begun to learn more specifically about the causes and possible treatments for different types of headache pain. The most common type of headache is the simple tension headache. Tension headaches are usually mild and short-lasting and can result from various factors, such as stress caused by worry or noise. Tension headaches are caused by a tightening of the neck or back muscles, which slows the flow of blood and, therefore, oxygen to the brain. It is the lack of oxygen that causes the pain. Most headaches can be relieved by taking a mild analgesic such as aspirin. Analgesics expand the blood vessels and restore the normal flow of blood and oxygen to the brain. A more serious type of headache is the migraine. Migraine headaches are often extremely painful and can last for hours or days. Like tension headaches, they can be the result of different factors, including stress, hormonal changes, and allergies. Unlike tension headaches, however, they are caused by an abnormal expansion or swelling (rather than a contraction) of the blood vessels within the head. Medicines that shrink swollen blood vessels can be used to treat migraine headaches. A tiny minority of headaches can be linked to severe physical problems such as head injury or brain tumors. For these types of headaches, there are medicines to treat the symptoms, but there is no cure unless the underlying problem is removed.', q:'Migraine headaches _____.', c:['are the most common kind of headache','usually last only a few minutes','can cause extreme pain','have one main cause'], a:'can cause extreme pain' },
+  { s:'read', passageTitle:'Headaches', passage:'Everyone has experienced headaches, but only recently have medical researchers begun to learn more specifically about the causes and possible treatments for different types of headache pain. The most common type of headache is the simple tension headache. Tension headaches are usually mild and short-lasting and can result from various factors, such as stress caused by worry or noise. Tension headaches are caused by a tightening of the neck or back muscles, which slows the flow of blood and, therefore, oxygen to the brain. It is the lack of oxygen that causes the pain. Most headaches can be relieved by taking a mild analgesic such as aspirin. Analgesics expand the blood vessels and restore the normal flow of blood and oxygen to the brain. A more serious type of headache is the migraine. Migraine headaches are often extremely painful and can last for hours or days. Like tension headaches, they can be the result of different factors, including stress, hormonal changes, and allergies. Unlike tension headaches, however, they are caused by an abnormal expansion or swelling (rather than a contraction) of the blood vessels within the head. Medicines that shrink swollen blood vessels can be used to treat migraine headaches. A tiny minority of headaches can be linked to severe physical problems such as head injury or brain tumors. For these types of headaches, there are medicines to treat the symptoms, but there is no cure unless the underlying problem is removed.', q:'Medicines for migraines _____.', c:['relax the head and neck','generally relieve tension','increase the flow of blood','cause blood vessels to contract'], a:'cause blood vessels to contract' },
+  { s:'read', passageTitle:'Headaches', passage:'Everyone has experienced headaches, but only recently have medical researchers begun to learn more specifically about the causes and possible treatments for different types of headache pain. The most common type of headache is the simple tension headache. Tension headaches are usually mild and short-lasting and can result from various factors, such as stress caused by worry or noise. Tension headaches are caused by a tightening of the neck or back muscles, which slows the flow of blood and, therefore, oxygen to the brain. It is the lack of oxygen that causes the pain. Most headaches can be relieved by taking a mild analgesic such as aspirin. Analgesics expand the blood vessels and restore the normal flow of blood and oxygen to the brain. A more serious type of headache is the migraine. Migraine headaches are often extremely painful and can last for hours or days. Like tension headaches, they can be the result of different factors, including stress, hormonal changes, and allergies. Unlike tension headaches, however, they are caused by an abnormal expansion or swelling (rather than a contraction) of the blood vessels within the head. Medicines that shrink swollen blood vessels can be used to treat migraine headaches. A tiny minority of headaches can be linked to severe physical problems such as head injury or brain tumors. For these types of headaches, there are medicines to treat the symptoms, but there is no cure unless the underlying problem is removed.', q:'Headaches caused by serious physical problems _____.', c:['can\'t be treated','don\'t cause much pain','have no symptoms','are not very common'], a:'are not very common' },
+];
+
+const Q_LANGUAGE = [
+  { s:'lang', q:'_____ several good restaurants in our neighborhood.', c:['There','They\'re','There are','Their'], a:'There are' },
+  { s:'lang', q:'The gas station is _____ Main Street.', c:['on','at','next','close'], a:'on' },
+  { s:'lang', q:'"I can\'t swim very well." "I can\'t _____."', c:['too','either','so','neither'], a:'either' },
+  { s:'lang', q:'I enjoy _____ out two or three times a week.', c:['to eat','eating','eat','I eat'], a:'eating' },
+  { s:'lang', q:'These days, _____ women keep working after they get married.', c:['most','most of','almost','the most'], a:'most' },
+  { s:'lang', q:'My new job is very _____.', c:['excitement','excited','exciting','excite'], a:'exciting' },
+  { s:'lang', q:'After finishing college, I hope _____ married.', c:['get','that get','getting','to get'], a:'to get' },
+  { s:'lang', q:'Mt. Everest is _____ mountain in the world.', c:['the high','high as','higher than','the highest'], a:'the highest' },
+  { s:'lang', q:'Bob\'s never been bungee jumping, _____ he?', c:['is','has','does','was'], a:'has' },
+  { s:'lang', q:'I\'ve run out of money. I wish I _____ more.', c:['am saving','have saved','had saved','will save'], a:'had saved' },
+  { s:'lang', q:'Could you tell me where _____?', c:['is the post office','the post office is','is it the post office','it is the post office'], a:'the post office is' },
+  { s:'lang', q:'If I had known about the accident, I _____ it to the police.', c:['reported','would have reported','was reporting','have been reporting'], a:'would have reported' },
+  { s:'lang', q:'Yolanda _____ part time for several years now.', c:['has been working','is working','works','was working'], a:'has been working' },
+  { s:'lang', q:'The Taj Mahal is really worth _____.', c:['to see it','seeing','you see it','see'], a:'seeing' },
+  { s:'lang', q:'If I went to live in a foreign country, _____ my friends.', c:['I\'d miss','I\'m missing','I missed','I miss'], a:'I\'d miss' },
+  { s:'lang', q:'Would you mind _____ the window?', c:['open','opening','to open','I open'], a:'opening' },
+  { s:'lang', q:'I was interested _____ the violin.', c:['to study','study','in studying','studied'], a:'in studying' },
+  { s:'lang', q:'Before a film is finished, it needs _____.', c:['they edit it','to edit','to be edited','being edited'], a:'to be edited' },
+  { s:'lang', q:'By 2020, scientists _____ a cure for cancer.', c:['had found','will have found','are finding','have been finding'], a:'will have found' },
+  { s:'lang', q:'"What happened to Kate?" "She must _____ about our appointment."', c:['forget','be forgetting','forgot','have forgotten'], a:'have forgotten' },
+  { s:'lang', q:'We\'re not used _____ our own meals.', c:['cook','to cook','cooking','to cooking'], a:'to cooking' },
+  { s:'lang', q:'Chicago, _____ is nicknamed the Windy City, is the largest city in Illinois.', c:['it','which','what','that'], a:'which' },
+  { s:'lang', q:'_____ John, I like to cook.', c:['Unless','Except','Instead','Unlike'], a:'Unlike' },
+  { s:'lang', q:'Before _____ breakfast, I usually take a shower.', c:['eat','to eat','eating','that eat'], a:'eating' },
+  { s:'lang', q:'I\'m taking a class _____ learn more about my computer.', c:['so that','in order','in order to','that'], a:'in order to' },
+  { s:'lang', q:'For me, mathematics is _____ difficult than biology.', c:['more','the more','most','the most'], a:'more' },
+  { s:'lang', q:'I would rather _____ evening classes.', c:['don\'t take','not take','no taking','not taking'], a:'not take' },
+  { s:'lang', q:'I feel sick. I shouldn\'t _____ so much.', c:['to eat','eaten','have eaten','eating'], a:'have eaten' },
+  { s:'lang', q:'Jim\'s boss demanded that he _____ to work earlier.', c:['has come','coming','is come','come'], a:'come' },
+  { s:'lang', q:'The earlier children learn to read, _____ for their education.', c:['good','the good','the better','the best'], a:'the better' },
+];
+
+// Assign stable IDs so exports always map to the correct literal question
+(function assignIds(){
+  Q_LISTENING.forEach(function(q,i){ q.qid = 'listen_' + (i+1); });
+  Q_READING.forEach(function(q,i){   q.qid = 'read_'   + (i+1); });
+  Q_LANGUAGE.forEach(function(q,i){  q.qid = 'lang_'   + (i+1); });
+})();
+</script>
+
+<!-- ══ DB HELPERS ══ -->
+<script>
+async function dbFetch(path, method, body){
+  const opts = { method: method||'GET', headers: {'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY} };
+  if(body) opts.body = JSON.stringify(body);
+  const res = await fetch(SUPABASE_URL+'/rest/v1/'+path, opts);
+  if(!res.ok) throw new Error(await res.text());
+  const t = await res.text();
+  return t ? JSON.parse(t) : [];
+}
+async function dbLogin(empId, password){
+  const rows = await dbFetch('employees?employee_id=eq.'+encodeURIComponent(empId)+'&is_active=eq.true','GET');
+  if(!rows.length) throw new Error('ID not found or account inactive');
+  if(rows[0].password !== password) throw new Error('Incorrect password');
+  return rows[0];
+}
+async function dbCheckDuplicate(empId, quizCode){
+  const rows = await dbFetch('submissions_log?employee_id=eq.'+encodeURIComponent(empId)+'&quiz_code=eq.'+encodeURIComponent(quizCode),'GET');
+  return rows.length > 0;
+}
+async function dbLogSubmission(empId, quizCode){
+  await fetch(SUPABASE_URL+'/rest/v1/submissions_log', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Prefer':'return=minimal'},
+    body: JSON.stringify({employee_id:empId, quiz_code:quizCode})
+  });
+  return true;
+}
+async function dbInsert(rows){
+  const res = await fetch(SUPABASE_URL+'/rest/v1/'+TABLE, {
+    method:'POST',
+    headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Prefer':'return=minimal'},
+    body: JSON.stringify(rows)
+  });
+  if(!res.ok) throw new Error(await res.text());
+  return true;
+}
+async function dbSelect(){
+  const res = await fetch(SUPABASE_URL+'/rest/v1/'+TABLE+'?question_number=eq.1&quiz_code=eq.'+encodeURIComponent(QUIZ_CONFIG.quiz_code)+'&order=submitted_at.desc',
+    {headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}});
+  if(!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+async function dbSelectAll(){
+  const PAGE=1000; let all=[], from=0;
+  while(true){
+    const res = await fetch(SUPABASE_URL+'/rest/v1/'+TABLE+'?quiz_code=eq.'+encodeURIComponent(QUIZ_CONFIG.quiz_code)+'&order=submission_id.asc,question_number.asc',
+      {headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Range':from+'-'+(from+PAGE-1)}});
+    if(!res.ok) throw new Error(await res.text());
+    const chunk = await res.json();
+    all = all.concat(chunk);
+    if(chunk.length < PAGE) break;
+    from += PAGE;
+  }
+  return all;
+}
+async function dbGetAllEmployees(){
+  const res = await fetch(SUPABASE_URL+'/rest/v1/employees?select=employee_id,full_name,department,role,assigned_quiz_code&order=full_name.asc',
+    {headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}});
+  if(!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+window._dbReady = true;
+</script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-track{background:#05070f;}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#0369a1,#0891b2);border-radius:10px;border:2px solid #05070f;}
+
+body{min-height:100vh;font-family:'Inter',sans-serif;background:radial-gradient(ellipse at top,#0a1628 0%,#05070f 60%);color:#fff;overflow-x:hidden;}
+.bg-layer{position:fixed;inset:0;z-index:0;overflow:hidden;}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);animation:orbFloat 16s ease-in-out infinite alternate;}
+.orb1{width:640px;height:640px;background:radial-gradient(circle,rgba(3,105,161,0.38),transparent 70%);top:-20%;left:-15%;animation-duration:18s;}
+.orb2{width:540px;height:540px;background:radial-gradient(circle,rgba(8,145,178,0.28),transparent 70%);top:30%;right:-10%;animation-duration:14s;animation-delay:-5s;}
+.orb3{width:440px;height:440px;background:radial-gradient(circle,rgba(20,184,166,0.2),transparent 70%);bottom:-15%;left:25%;animation-duration:20s;animation-delay:-9s;}
+@keyframes orbFloat{0%{transform:translate(0,0) scale(1);}50%{transform:translate(30px,-50px) scale(1.07);}100%{transform:translate(-20px,40px) scale(0.96);}}
+.bg-grid{position:fixed;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(rgba(56,189,248,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.05) 1px,transparent 1px);background-size:52px 52px;}
+.wrap{max-width:820px;margin:0 auto;padding:20px 16px 40px;position:relative;z-index:10;}
+.screen{display:none;}
+.screen.active{display:block;animation:fadeUp .45s cubic-bezier(.22,1,.36,1);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+/* Shared */
+.logo-ring{display:inline-flex;align-items:center;justify-content:center;width:150px;height:150px;border-radius:50%;background:conic-gradient(from 0deg,#0369a1,#0891b2,#14b8a6,#0ea5e9,#0369a1);padding:5px;margin-bottom:22px;box-shadow:0 0 50px rgba(3,105,161,.55);}
+.logo-inner{width:100%;height:100%;border-radius:50%;background:#05070f;display:flex;align-items:center;justify-content:center;font-size:48px;overflow:hidden;}
+.logo-inner img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(14,165,233,.16);border:1px solid rgba(56,189,248,.45);border-radius:99px;padding:7px 20px;font-size:12px;font-weight:700;color:#7dd3fc;letter-spacing:.06em;margin-bottom:20px;}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:#38bdf8;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.s-title{font-size:38px;font-weight:900;line-height:1.15;margin-bottom:10px;background:linear-gradient(135deg,#fff 0%,#7dd3fc 40%,#5eead4 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.s-sub{font-size:14px;color:#94a3b8;line-height:1.8;margin-bottom:34px;}
+
+.form-group{margin-bottom:18px;}
+.form-label{display:block;font-size:13px;font-weight:700;color:#94a3b8;margin-bottom:8px;letter-spacing:.04em;}
+.form-input{width:100%;padding:13px 16px;background:#111c2e;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;font-family:'Inter',sans-serif;font-size:15px;color:#f1f5f9;outline:none;transition:border-color .2s,box-shadow .2s;}
+.form-input:focus{border-color:rgba(56,189,248,.6);box-shadow:0 0 0 3px rgba(56,189,248,.12);}
+.form-input::placeholder{color:#475569;}
+
+/* Login */
+.login-hero{text-align:center;padding:46px 0 30px;}
+.login-card{background:#0d1626;border:2px solid rgba(56,189,248,.45);border-radius:18px;padding:32px;margin-bottom:20px;box-shadow:0 20px 60px -20px rgba(0,0,0,.6),0 0 40px rgba(56,189,248,.06);}
+.login-error{background:rgba(239,68,68,.12);border:1.5px solid rgba(239,68,68,.4);border-radius:10px;padding:12px 16px;font-size:13px;color:#fca5a5;margin-bottom:16px;display:none;text-align:center;}
+.login-btn{display:block;width:100%;padding:15px;background:linear-gradient(135deg,#0891b2,#0369a1,#0891b2);background-size:200% auto;border:none;border-radius:14px;cursor:pointer;font-family:'Inter',sans-serif;font-size:16px;font-weight:800;color:#fff;transition:transform .15s,box-shadow .15s,background-position .4s;box-shadow:0 8px 28px rgba(8,145,178,.3);}
+.login-btn:hover{transform:translateY(-2px);background-position:right center;box-shadow:0 12px 36px rgba(3,105,161,.4);}
+.login-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+
+/* Rules */
+.sec-hero{text-align:center;padding:38px 0 22px;}
+.sec-hero h2{font-size:26px;font-weight:900;margin-bottom:8px;background:linear-gradient(135deg,#fff,#7dd3fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sec-hero p{font-size:13px;color:#64748b;}
+.emp-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(20,184,166,.15);border:1px solid rgba(94,234,212,.4);border-radius:99px;padding:7px 18px;font-size:13px;font-weight:700;color:#5eead4;margin:14px 0 24px;}
+.card{background:#0d1626;border:2px solid rgba(56,189,248,.35);border-radius:18px;padding:28px;margin-bottom:18px;}
+.rule-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 18px;margin-bottom:10px;font-size:14px;line-height:1.7;color:#e2e8f0;}
+.rule-item strong{color:#7dd3fc;}
+.consent{display:flex;align-items:flex-start;gap:10px;background:rgba(3,105,161,.12);border:1.5px solid rgba(56,189,248,.3);border-radius:12px;padding:16px 18px;margin:18px 0;cursor:pointer;font-size:13px;color:#bae6fd;line-height:1.7;}
+.consent input{margin-top:3px;width:18px;height:18px;cursor:pointer;flex-shrink:0;}
+.back-btn{width:100%;padding:12px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#64748b;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;margin-top:8px;}
+.back-btn:hover{background:rgba(255,255,255,.08);color:#94a3b8;}
+
+/* Exam topbar */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+.q-counter{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:99px;padding:8px 16px;font-size:13px;font-weight:700;color:#e2e8f0;}
+.q-counter span{color:#fff;font-size:15px;}
+.g-timer{display:flex;align-items:center;gap:8px;border-radius:99px;padding:9px 20px;transition:all .4s;}
+.g-timer.ok{background:rgba(8,145,178,.18);border:1.5px solid rgba(103,232,249,.4);}
+.g-timer.warn{background:rgba(245,158,11,.2);border:1.5px solid rgba(252,211,77,.5);animation:warnPulse 1.2s ease-in-out infinite;}
+.g-timer.danger{background:rgba(220,38,38,.22);border:1.5px solid rgba(252,165,165,.6);animation:dangerPulse .7s ease-in-out infinite;}
+@keyframes warnPulse{0%,100%{box-shadow:0 0 20px rgba(245,158,11,.2)}50%{box-shadow:0 0 40px rgba(245,158,11,.45)}}
+@keyframes dangerPulse{0%,100%{box-shadow:0 0 30px rgba(220,38,38,.3)}50%{box-shadow:0 0 55px rgba(220,38,38,.55)}}
+.g-timer.ok .t-num{color:#67e8f9}.g-timer.warn .t-num{color:#fcd34d}.g-timer.danger .t-num{color:#fca5a5}
+.t-num{font-size:20px;font-weight:900;min-width:58px;text-align:center;}
+.cand-badge{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;background:rgba(3,105,161,.14);border:1.5px solid rgba(56,189,248,.35);border-radius:99px;padding:8px 20px;margin-bottom:14px;font-size:13px;font-weight:700;color:#bae6fd;}
+
+.prog-wrap{margin-bottom:14px;}
+.prog-labels{display:flex;justify-content:space-between;font-size:12px;color:#94a3b8;font-weight:600;margin-bottom:8px;}
+.prog-track{height:6px;border-radius:3px;background:rgba(255,255,255,.08);}
+.prog-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#0369a1,#0891b2,#14b8a6);background-size:200%;animation:progAnim 3s linear infinite;transition:width .5s cubic-bezier(.4,0,.2,1);box-shadow:0 0 10px rgba(8,145,178,.5);}
+@keyframes progAnim{0%{background-position:0%}100%{background-position:200%}}
+
+.sec-tag{display:inline-flex;align-items:center;gap:7px;border-radius:99px;padding:7px 18px;font-size:12px;font-weight:800;letter-spacing:.06em;margin-bottom:12px;}
+.st-listen{background:rgba(8,145,178,.2);border:1.5px solid rgba(103,232,249,.55);color:#bae6fd;}
+.st-read{background:rgba(20,184,166,.2);border:1.5px solid rgba(94,234,212,.55);color:#ccfbf1;}
+.st-lang{background:rgba(168,85,247,.2);border:1.5px solid rgba(216,180,254,.55);color:#f3e8ff;}
+
+/* Audio player */
+.audio-card{background:#0d1626;border:2px solid rgba(103,232,249,.5);border-radius:16px;padding:18px 20px;margin-bottom:14px;box-shadow:0 0 30px rgba(8,145,178,.08);}
+.audio-title{font-size:12px;font-weight:800;color:#67e8f9;letter-spacing:.07em;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.audio-note{font-size:12px;color:#64748b;margin-top:8px;line-height:1.6;}
+audio{width:100%;height:40px;}
+
+/* Situation / passage */
+.context-card{background:rgba(255,255,255,.05);border-left:3px solid #0891b2;border-radius:10px;padding:14px 18px;margin-bottom:12px;font-size:14px;line-height:1.75;color:#cbd5e1;}
+.context-card .ctx-label{font-size:11px;font-weight:800;color:#67e8f9;letter-spacing:.08em;margin-bottom:6px;text-transform:uppercase;}
+.passage-card{background:rgba(255,255,255,.05);border-left:3px solid #14b8a6;border-radius:10px;padding:16px 20px;margin-bottom:12px;max-height:280px;overflow-y:auto;}
+.passage-card .p-title{font-size:13px;font-weight:800;color:#5eead4;margin-bottom:8px;}
+.passage-card .p-body{font-size:13.5px;line-height:1.85;color:#cbd5e1;}
+
+/* Question */
+.q-card{background:#0d1626;border-radius:18px;padding:26px 24px;margin-bottom:14px;position:relative;overflow:hidden;box-shadow:0 20px 50px -20px rgba(0,0,0,.55);}
+.q-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);}
+.q-card.listen-card{border:2px solid rgba(8,145,178,.6);}
+.q-card.read-card{border:2px solid rgba(20,184,166,.6);}
+.q-card.lang-card{border:2px solid rgba(168,85,247,.6);}
+.q-n-lbl{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-bottom:12px;opacity:.6;}
+.q-card.listen-card .q-n-lbl{color:#67e8f9}
+.q-card.read-card .q-n-lbl{color:#5eead4}
+.q-card.lang-card .q-n-lbl{color:#d8b4fe}
+.q-text{font-size:17px;font-weight:600;line-height:1.8;color:#f1f5f9;}
+
+/* Choices */
+.choices{display:flex;flex-direction:column;gap:10px;margin-bottom:14px;}
+.choice{display:flex;align-items:center;gap:14px;padding:15px 20px;border-radius:12px;background:#152134;border:1.5px solid rgba(255,255,255,.12);cursor:pointer;font-family:'Inter',sans-serif;font-size:15px;font-weight:500;color:#e2e8f0;text-align:left;width:100%;transition:all .18s cubic-bezier(.4,0,.2,1);}
+.choice:hover:not(:disabled){background:#1c2b42;border-color:rgba(255,255,255,.28);transform:translateX(5px);}
+.ltr{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);color:#cbd5e1;transition:all .22s;}
+.choice.selected{background:#0c3a52;border-color:rgba(56,189,248,.7);color:#bae6fd;box-shadow:0 0 20px rgba(56,189,248,.15);transform:translateX(3px);}
+.choice.selected .ltr{background:#0891b2;border-color:#0891b2;color:#fff;box-shadow:0 0 12px rgba(8,145,178,.6);}
+
+/* Navigator */
+.q-nav-wrap{background:#0d1626;border:1.5px solid rgba(255,255,255,.1);border-radius:16px;padding:16px;margin-bottom:14px;}
+.q-nav-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;}
+.q-nav-title{font-size:11px;font-weight:700;color:#64748b;letter-spacing:.07em;}
+.q-nav-legend{display:flex;gap:12px;font-size:11px;color:#64748b;}
+.q-nav-legend span{display:flex;align-items:center;gap:4px;}
+.q-nav-dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+.q-nav-grid{display:flex;flex-wrap:wrap;gap:6px;}
+.qn-btn{width:34px;height:34px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;}
+.qn-btn.unanswered{background:rgba(255,255,255,.07);color:#64748b;border:1px solid rgba(255,255,255,.1);}
+.qn-btn.answered{background:rgba(8,145,178,.3);color:#7dd3fc;border:1px solid rgba(8,145,178,.6);}
+.qn-btn.current{background:#0891b2;color:#fff;border:1px solid #0891b2;box-shadow:0 0 12px rgba(8,145,178,.6);}
+.qn-btn:hover{transform:scale(1.12);}
+
+/* Nav buttons */
+.nav-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
+.nav-btn{padding:11px 26px;border-radius:12px;background:#152134;border:1.5px solid rgba(255,255,255,.15);color:#e2e8f0;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .18s;}
+.nav-btn:hover{background:#1c2b42;border-color:rgba(255,255,255,.28);}
+.nav-btn:disabled{opacity:.3;cursor:not-allowed;}
+.nav-btn.btn-next{background:rgba(8,145,178,.25);border-color:rgba(103,232,249,.5);color:#bae6fd;}
+.nav-btn.btn-next:hover{background:rgba(8,145,178,.4);border-color:#67e8f9;transform:translateX(3px);}
+
+/* Modals */
+.modal-overlay{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);}
+.modal-card{background:#0a1220;border-radius:20px;padding:36px 32px;text-align:center;max-width:420px;width:92%;}
+.modal-card.b-cyan{border:2px solid rgba(56,189,248,.5);box-shadow:0 0 60px rgba(56,189,248,.1);}
+.modal-card.b-red{border:2px solid rgba(239,68,68,.5);box-shadow:0 0 60px rgba(239,68,68,.1);}
+.modal-emoji{font-size:52px;display:block;margin-bottom:14px;}
+.modal-title{font-size:20px;font-weight:900;margin-bottom:8px;}
+.modal-msg{font-size:13px;color:#94a3b8;line-height:1.8;margin-bottom:20px;}
+.modal-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.modal-stat{border-radius:12px;padding:14px;}
+.ms-blue{background:rgba(8,145,178,.15);border:1px solid rgba(8,145,178,.35);}
+.ms-gray{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);}
+.modal-stat-val{font-size:24px;font-weight:900;}
+.modal-stat-lbl{font-size:11px;color:#64748b;margin-top:3px;}
+.modal-btns{display:flex;gap:10px;}
+.modal-btn{flex:1;padding:13px;border-radius:12px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .18s;border:none;}
+.modal-btn.cancel{background:rgba(255,255,255,.08);color:#e2e8f0;border:1px solid rgba(255,255,255,.15);}
+.modal-btn.confirm{background:linear-gradient(135deg,#0369a1,#0891b2);color:#fff;}
+.modal-btn.confirm:hover{transform:translateY(-2px);}
+.unanswered-list{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:#fca5a5;max-height:120px;overflow-y:auto;line-height:2;}
+
+.saving-overlay{position:fixed;inset:0;z-index:250;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);}
+.saving-card{background:#0a1220;border:2px solid rgba(56,189,248,.4);border-radius:20px;padding:44px 36px;text-align:center;max-width:340px;}
+.spinner{width:50px;height:50px;border:4px solid rgba(56,189,248,.2);border-top:4px solid #0891b2;border-radius:50%;animation:spin .9s linear infinite;margin:0 auto 20px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.saving-card h3{font-size:18px;font-weight:700;color:#67e8f9;margin-bottom:8px;}
+.saving-card p{font-size:13px;color:#64748b;}
+
+/* Result */
+.result-wrap{text-align:center;padding:38px 0 22px;}
+.r-emoji{font-size:60px;display:block;margin-bottom:14px;animation:pop .55s cubic-bezier(.22,1,.36,1);}
+@keyframes pop{from{transform:scale(0) rotate(-15deg)}60%{transform:scale(1.15) rotate(4deg)}to{transform:scale(1) rotate(0)}}
+.r-title{font-size:28px;font-weight:900;margin-bottom:6px;background:linear-gradient(135deg,#fff,#7dd3fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.r-sub{font-size:13px;color:#64748b;margin-bottom:8px;}
+.r-name-badge{display:inline-block;background:rgba(3,105,161,.2);border:1px solid rgba(56,189,248,.4);border-radius:99px;padding:5px 18px;font-size:13px;font-weight:700;color:#bae6fd;margin-bottom:26px;}
+.done-card{background:rgba(20,184,166,.14);border:1.5px solid rgba(94,234,212,.45);border-radius:16px;text-align:center;padding:32px;margin-bottom:20px;}
+.save-status{border-radius:12px;padding:14px 20px;margin-bottom:20px;font-size:14px;font-weight:700;text-align:center;}
+.save-status.success{background:#062e28;border:2px solid #14b8a6;color:#ccfbf1;}
+.save-status.error{background:#2b0d0d;border:2px solid #ef4444;color:#fee2e2;}
+.res-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-restart{flex:1;padding:15px;border-radius:14px;background:#152134;border:1.5px solid rgba(255,255,255,.15);color:#e2e8f0;font-family:'Inter',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .18s;}
+.btn-restart:hover{background:#1c2b42;}
+
+/* Certificate */
+.cert-wrap{background:linear-gradient(135deg,#0a1628,#0c2233);border:3px solid rgba(103,232,249,.55);border-radius:20px;padding:42px 34px;text-align:center;margin-bottom:20px;position:relative;overflow:hidden;}
+.cert-wrap::before{content:'';position:absolute;inset:8px;border:1px solid rgba(103,232,249,.2);border-radius:14px;pointer-events:none;}
+.cert-logo img{width:64px;height:64px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:block;}
+.cert-org{font-size:12px;color:#64748b;margin-bottom:6px;letter-spacing:.07em;}
+.cert-title{font-size:20px;font-weight:900;color:#67e8f9;margin-bottom:16px;}
+.cert-presents{font-size:13px;color:#64748b;margin-bottom:8px;}
+.cert-name{font-size:30px;font-weight:900;color:#fff;margin-bottom:6px;}
+.cert-sub{font-size:13px;color:#94a3b8;margin-bottom:20px;}
+.placement-box{background:rgba(8,145,178,.15);border:2px solid rgba(103,232,249,.5);border-radius:14px;padding:18px;margin:18px 0;}
+.placement-lvl{font-size:11px;color:#67e8f9;letter-spacing:.08em;font-weight:800;margin-bottom:6px;}
+.placement-val{font-size:20px;font-weight:900;color:#fff;line-height:1.4;}
+.placement-rating{display:inline-block;background:rgba(103,232,249,.2);border:1px solid rgba(103,232,249,.4);border-radius:99px;padding:3px 14px;font-size:12px;font-weight:800;color:#bae6fd;margin-top:8px;}
+.cert-score-row{display:flex;justify-content:center;gap:20px;margin-bottom:18px;flex-wrap:wrap;}
+.cert-stat{text-align:center;}
+.cert-stat-val{font-size:26px;font-weight:900;}
+.cert-stat-lbl{font-size:11px;color:#64748b;margin-top:2px;}
+.cert-bd-row{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;margin-bottom:6px;font-size:12px;}
+.cbr-label{color:#94a3b8;font-weight:600;}
+.cbr-score{color:#fff;font-weight:900;}
+.cert-bd-total{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:rgba(103,232,249,.12);border:1.5px solid rgba(103,232,249,.4);border-radius:10px;margin-top:8px;font-size:13px;font-weight:900;color:#67e8f9;}
+.cert-date{font-size:11px;color:#475569;margin-top:14px;border-top:1px solid rgba(255,255,255,.07);padding-top:14px;}
+.cert-btns{display:flex;gap:10px;margin-bottom:20px;}
+.cert-btn{flex:1;padding:13px;border-radius:12px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .18s;}
+.cert-btn.print{background:linear-gradient(135deg,#0891b2,#0369a1);border:none;color:#fff;}
+.cert-btn.print:hover{transform:translateY(-2px);}
+.cert-btn.close-cert{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#e2e8f0;}
+
+/* Dashboard */
+.dash-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:22px;}
+.dash-title{font-size:22px;font-weight:900;color:#f1f5f9;}
+.dash-badge{background:rgba(20,184,166,.2);border:1px solid rgba(94,234,212,.4);border-radius:99px;padding:6px 16px;font-size:12px;font-weight:700;color:#5eead4;}
+.refresh-btn{padding:10px 20px;border-radius:10px;background:rgba(8,145,178,.15);border:1.5px solid rgba(103,232,249,.4);color:#67e8f9;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .18s;}
+.refresh-btn:hover{background:rgba(8,145,178,.25);}
+.dash-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px;}
+.sum-card{background:#0d1626;border-radius:14px;padding:16px;text-align:center;}
+.sc-1{border:1.5px solid rgba(3,105,161,.5)}.sc-2{border:1.5px solid rgba(8,145,178,.5)}
+.sc-3{border:1.5px solid rgba(20,184,166,.5)}.sc-4{border:1.5px solid rgba(168,85,247,.5)}
+.sum-val{font-size:24px;font-weight:900;margin-bottom:4px;}
+.sum-lbl{font-size:11px;color:#64748b;}
+.dash-search{width:100%;padding:12px 18px;background:#0d1626;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;font-family:'Inter',sans-serif;font-size:14px;color:#f1f5f9;margin-bottom:14px;outline:none;}
+.dash-search:focus{border-color:rgba(103,232,249,.5);}
+.dash-tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.dash-tab{padding:9px 20px;border-radius:99px;background:#0d1626;border:1.5px solid rgba(255,255,255,.12);color:#94a3b8;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .18s;}
+.dash-tab.active{background:rgba(8,145,178,.25);border-color:rgba(103,232,249,.6);color:#bae6fd;}
+.tab-count{background:rgba(255,255,255,.12);padding:1px 8px;border-radius:99px;margin-left:6px;font-size:11px;}
+.table-wrap{background:#0d1626;border:1.5px solid rgba(255,255,255,.1);border-radius:16px;overflow-x:auto;margin-bottom:16px;}
+.dash-table{width:100%;border-collapse:collapse;min-width:640px;}
+.dash-table th{padding:14px 16px;text-align:left;font-size:12px;font-weight:700;color:#64748b;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.07);background:#0a1220;white-space:nowrap;}
+.dash-table td{padding:13px 16px;font-size:13px;color:#e2e8f0;border-bottom:1px solid rgba(255,255,255,.05);}
+.dash-table tr:last-child td{border-bottom:none;}
+.dash-table tr:hover td{background:rgba(255,255,255,.03);}
+.lvl-badge{display:inline-block;padding:3px 12px;border-radius:99px;font-weight:700;font-size:12px;white-space:nowrap;}
+.lvl-high{background:rgba(20,184,166,.2);color:#5eead4;border:1px solid rgba(20,184,166,.4);}
+.lvl-mid{background:rgba(8,145,178,.2);color:#7dd3fc;border:1px solid rgba(8,145,178,.4);}
+.lvl-low{background:rgba(245,158,11,.2);color:#fcd34d;border:1px solid rgba(245,158,11,.4);}
+.empty-state{text-align:center;padding:46px 20px;color:#475569;}
+.empty-icon{font-size:48px;display:block;margin-bottom:12px;}
+
+@media(max-width:560px){
+  .s-title{font-size:26px}.q-text{font-size:15px}
+  .dash-summary{grid-template-columns:repeat(2,1fr)}
+  .res-btns,.cert-btns,.modal-btns{flex-direction:column}
+  .qn-btn{width:30px;height:30px;font-size:11px}
+  .logo-ring{width:120px;height:120px}
+}
+@media print{body *{visibility:hidden}#cert-modal,#cert-modal *{visibility:visible}#cert-modal{position:fixed;inset:0;display:flex!important;align-items:center;justify-content:center;background:#fff;z-index:9999}}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
+<div class="bg-grid"></div>
+
+<!-- Timeout -->
+<div class="modal-overlay" id="to-overlay">
+  <div class="modal-card b-red">
+    <span class="modal-emoji">&#9200;</span>
+    <div class="modal-title" style="color:#fca5a5;">Time is up!</div>
+    <div class="modal-msg">The allotted time has ended.<br>Your answers will now be submitted.</div>
+    <button class="modal-btn confirm" style="width:100%;" onclick="handleTimeout()">View Results &rarr;</button>
+  </div>
+</div>
+
+<!-- Saving -->
+<div class="saving-overlay" id="saving-overlay">
+  <div class="saving-card">
+    <div class="spinner"></div>
+    <h3>Saving your results...</h3>
+    <p>Uploading to the database</p>
+  </div>
+</div>
+
+<!-- Confirm submit -->
+<div class="modal-overlay" id="confirm-modal">
+  <div class="modal-card b-cyan">
+    <span class="modal-emoji">&#128203;</span>
+    <div class="modal-title" style="color:#7dd3fc;">Submit Test</div>
+    <div class="modal-msg" id="confirm-msg">Are you sure you want to submit?</div>
+    <div class="modal-stats">
+      <div class="modal-stat ms-blue"><div class="modal-stat-val" style="color:#7dd3fc" id="conf-answered">0</div><div class="modal-stat-lbl">Answered</div></div>
+      <div class="modal-stat ms-gray"><div class="modal-stat-val" style="color:#64748b" id="conf-unanswered">0</div><div class="modal-stat-lbl">Unanswered</div></div>
+    </div>
+    <div class="unanswered-list" id="unanswered-list" style="display:none;"></div>
+    <div class="modal-btns">
+      <button class="modal-btn cancel" onclick="closeConfirmModal()">&larr; Review Answers</button>
+      <button class="modal-btn confirm" onclick="confirmSubmit()">Submit Test</button>
+    </div>
+  </div>
+</div>
+
+<!-- Certificate -->
+<div class="modal-overlay" id="cert-modal">
+  <div style="max-width:540px;width:95%;max-height:90vh;overflow-y:auto;">
+    <div class="cert-wrap" id="certificate">
+      <div class="cert-logo" id="cert-logo"></div>
+      <div class="cert-org" id="cert-org-top">&mdash;</div>
+      <div class="cert-title">Certificate of Completion</div>
+      <div class="cert-presents">This certifies that</div>
+      <div class="cert-name" id="cert-name">&mdash;</div>
+      <div class="cert-sub" id="cert-sub">&mdash;</div>
+      <div style="width:80%;height:1px;background:rgba(103,232,249,.3);margin:0 auto 16px;"></div>
+      <div style="font-size:13px;color:#94a3b8;margin-bottom:10px;">has completed the</div>
+      <div class="cert-title" style="font-size:16px;margin-bottom:12px;" id="cert-quiz-title">&mdash;</div>
+
+      <div class="placement-box">
+        <div class="placement-lvl">RECOMMENDED PLACEMENT</div>
+        <div class="placement-val" id="cert-placement">&mdash;</div>
+        <div class="placement-rating" id="cert-rating">&mdash;</div>
+      </div>
+
+      <div class="cert-score-row">
+        <div class="cert-stat"><div class="cert-stat-val" style="color:#5eead4" id="cert-score">0</div><div class="cert-stat-lbl">Score</div></div>
+        <div class="cert-stat"><div class="cert-stat-val" style="color:#7dd3fc" id="cert-pct">0%</div><div class="cert-stat-lbl">Percentage</div></div>
+        <div class="cert-stat"><div class="cert-stat-val" style="color:#fcd34d" id="cert-time">&mdash;</div><div class="cert-stat-lbl">Time</div></div>
+      </div>
+      <div id="cert-breakdown" style="margin-bottom:16px;"></div>
+      <div class="cert-date" id="cert-date">&mdash;</div>
+    </div>
+    <div class="cert-btns">
+      <button class="cert-btn print" onclick="window.print()">&#128424; Print Certificate</button>
+      <button class="cert-btn close-cert" onclick="document.getElementById('cert-modal').style.display='none'">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- LOGIN -->
+  <div id="login-screen" class="screen active">
+    <div class="login-hero">
+      <div class="logo-ring"><div class="logo-inner" id="login-logo">&#127891;</div></div>
+      <div class="badge"><span class="badge-dot"></span><span id="login-org">&mdash;</span></div>
+      <div class="s-title" id="login-title">&mdash;</div>
+      <div class="s-sub" id="login-sub">&mdash;</div>
+    </div>
+    <div class="login-card">
+      <div class="login-error" id="login-error">Invalid credentials</div>
+      <div class="form-group">
+        <label class="form-label">National ID / Candidate ID</label>
+        <input type="text" class="form-input" id="login-empid" placeholder="Enter your ID" autocomplete="username">
+      </div>
+      <div class="form-group" style="margin-bottom:24px;">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-input" id="login-pass" placeholder="Enter your password" autocomplete="current-password" onkeydown="if(event.key==='Enter') doLogin()">
+      </div>
+      <button class="login-btn" id="login-btn" onclick="doLogin()">Sign In &rarr;</button>
+    </div>
+  </div>
+
+  <!-- RULES -->
+  <div id="rules-screen" class="screen">
+    <div class="sec-hero">
+      <h2 id="rules-title">Test Instructions</h2>
+      <p>Please read carefully before you begin</p>
+      <div class="emp-badge" id="emp-badge">&#128100; &mdash;</div>
+    </div>
+    <div class="card">
+      <div class="rule-item">&#9200; <strong>Timed test</strong> &mdash; The test has a fixed duration. It will close automatically when time runs out and your current answers will be saved.</div>
+      <div class="rule-item">&#127911; <strong>Section I is Listening</strong> &mdash; You will hear conversations. The audio plays once for the whole section. Read each situation and question first, then listen.</div>
+      <div class="rule-item">&#128214; <strong>Sections II &amp; III</strong> &mdash; Reading passages and Language Use items. No audio required.</div>
+      <div class="rule-item">&#9999; <strong>You may change answers</strong> and move freely between questions before you submit.</div>
+      <div class="rule-item">&#9989; <strong>One attempt only</strong> &mdash; The test cannot be retaken once submitted.</div>
+      <div class="rule-item">&#128274; <strong>Your data is protected</strong> and used only for placement purposes.</div>
+      <label class="consent">
+        <input type="checkbox" id="consent-checkbox" onchange="var b=document.getElementById('start-exam-btn');b.disabled=!this.checked;b.style.opacity=this.checked?'1':'0.5';">
+        <span>I have read and agree to the instructions above</span>
+      </label>
+      <button class="login-btn" id="start-exam-btn" onclick="beginQuiz()" disabled style="opacity:.5;">Start Test &rarr;</button>
+    </div>
+    <button class="back-btn" onclick="doLogout()">&#128682; Sign Out</button>
+  </div>
+
+  <!-- EXAM -->
+  <div id="quiz-screen" class="screen">
+    <div class="topbar">
+      <div class="q-counter">Question <span id="q-num">1</span> / <span id="q-total">&mdash;</span></div>
+      <div class="g-timer ok" id="g-timer"><span>&#9200;</span><span class="t-num" id="t-num">60:00</span></div>
+    </div>
+    <div class="cand-badge" id="cand-badge">&#128100; &mdash; | &#127380; &mdash;</div>
+    <div class="prog-wrap">
+      <div class="prog-labels"><span id="prog-sec">&mdash;</span><span id="prog-pct">0%</span></div>
+      <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:1%"></div></div>
+    </div>
+
+    <div class="sec-tag st-listen" id="sec-tag">&#9670; Listening</div>
+
+    <!-- Audio (listening only) -->
+    <div class="audio-card" id="audio-card" style="display:none;">
+      <div class="audio-title">&#127911; LISTENING AUDIO &mdash; SECTION I</div>
+      <audio id="listen-audio" controls preload="metadata">
+        <source id="audio-src" src="" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <div class="audio-note">Play the audio once and answer all Listening questions as you listen. You may pause, but the recording is intended to be heard straight through.</div>
+    </div>
+
+    <!-- Context: situation (listening) or passage (reading) -->
+    <div class="context-card" id="context-card" style="display:none;">
+      <div class="ctx-label" id="ctx-label">SITUATION</div>
+      <div id="ctx-body">&mdash;</div>
+    </div>
+    <div class="passage-card" id="passage-card" style="display:none;">
+      <div class="p-title" id="p-title">&mdash;</div>
+      <div class="p-body" id="p-body">&mdash;</div>
+    </div>
+
+    <div class="q-card listen-card" id="q-card">
+      <div class="q-n-lbl" id="q-n-lbl">QUESTION 1</div>
+      <div class="q-text" id="q-text">...</div>
+    </div>
+
+    <div class="choices" id="choices"></div>
+
+    <div class="q-nav-wrap">
+      <div class="q-nav-header">
+        <div class="q-nav-title">&#128506; QUESTION NAVIGATOR</div>
+        <div class="q-nav-legend">
+          <span><span class="q-nav-dot" style="background:#0891b2"></span>Answered</span>
+          <span><span class="q-nav-dot" style="background:#374151"></span>Unanswered</span>
+          <span><span class="q-nav-dot" style="background:#67e8f9;box-shadow:0 0 6px #0891b2"></span>Current</span>
+        </div>
+      </div>
+      <div class="q-nav-grid" id="q-nav-grid"></div>
+    </div>
+
+    <div class="nav-row">
+      <div style="font-size:12px;color:#64748b;" id="answered-count">0 answered</div>
+      <div style="display:flex;gap:10px;">
+        <button class="nav-btn" id="prev-btn" onclick="prevQ()" disabled>&larr; Previous</button>
+        <button class="nav-btn btn-next" id="next-btn" onclick="nextQ()">Next &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result-screen" class="screen">
+    <div class="result-wrap">
+      <span class="r-emoji">&#9989;</span>
+      <div class="r-title">Test Submitted</div>
+      <div class="r-sub">Your answers have been recorded</div>
+      <div class="r-name-badge" id="r-name-badge">&mdash;</div>
+      <div class="done-card">
+        <div style="font-size:44px;margin-bottom:10px;">&#128190;</div>
+        <div style="font-size:17px;font-weight:700;color:#5eead4;margin-bottom:8px;">Your responses are saved</div>
+        <div style="font-size:13px;color:#64748b;">Placement results will be announced by the administration.</div>
+      </div>
+      <div class="save-status" id="save-status" style="display:none;"></div>
+      <div class="res-btns">
+        <button class="btn-restart" onclick="restart()">&larr; Back</button>
+        <button class="btn-restart" onclick="showCertificate()" style="background:rgba(8,145,178,.2);border-color:rgba(103,232,249,.4);color:#7dd3fc;">&#127894; Certificate</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dash-screen" class="screen">
+    <div class="dash-header">
+      <div>
+        <div class="dash-title">&#128202; Placement Results Dashboard</div>
+        <div class="dash-badge" id="total-badge">Loading...</div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="refresh-btn" onclick="loadDashboard()">&#128260; Refresh</button>
+        <button class="refresh-btn" style="background:rgba(20,184,166,.15);border-color:rgba(94,234,212,.4);color:#5eead4;" onclick="exportExcel()">&#128229; Export Excel</button>
+        <button class="refresh-btn" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.15);color:#94a3b8;" onclick="showScreen('login-screen')">&rarr; Home</button>
+      </div>
+    </div>
+    <div class="dash-summary">
+      <div class="sum-card sc-1"><div class="sum-val" style="color:#7dd3fc" id="sum-total">&mdash;</div><div class="sum-lbl">Candidates</div></div>
+      <div class="sum-card sc-2"><div class="sum-val" style="color:#67e8f9" id="sum-avg">&mdash;</div><div class="sum-lbl">Avg Score</div></div>
+      <div class="sum-card sc-3"><div class="sum-val" style="color:#5eead4" id="sum-best">&mdash;</div><div class="sum-lbl">Highest Score</div></div>
+      <div class="sum-card sc-4"><div class="sum-val" style="color:#d8b4fe" id="sum-lvl">&mdash;</div><div class="sum-lbl">Avg Level</div></div>
+    </div>
+    <input type="text" class="dash-search" id="dash-search" placeholder="&#128269; Search by name or ID..." oninput="renderDashboardView()">
+    <div class="dash-tabs">
+      <button class="dash-tab active" id="tab-results" onclick="switchDashTab('results')">&#9989; Results <span class="tab-count" id="tab-results-count">0</span></button>
+      <button class="dash-tab" id="tab-pending" onclick="switchDashTab('pending')">&#9203; Not Taken <span class="tab-count" id="tab-pending-count">0</span></button>
+      <button class="dash-tab" id="tab-ranking" onclick="switchDashTab('ranking')">&#127942; Ranking</button>
+    </div>
+    <div class="table-wrap" id="results-table-wrap">
+      <table class="dash-table">
+        <thead><tr><th>#</th><th>Name</th><th>ID</th><th>Score</th><th>Level</th><th>Placement</th><th>Time</th><th>Date</th></tr></thead>
+        <tbody id="dash-tbody"><tr><td colspan="8" style="text-align:center;padding:40px;color:#475569;">Loading...</td></tr></tbody>
+      </table>
+    </div>
+    <div class="table-wrap" id="pending-table-wrap" style="display:none;">
+      <table class="dash-table">
+        <thead><tr><th>#</th><th>Name</th><th>ID</th><th>Department</th><th>Role</th></tr></thead>
+        <tbody id="dash-pending-tbody"><tr><td colspan="5" style="text-align:center;padding:40px;color:#475569;">Loading...</td></tr></tbody>
+      </table>
+    </div>
+    <div class="table-wrap" id="ranking-table-wrap" style="display:none;">
+      <table class="dash-table">
+        <thead><tr><th>Rank</th><th>Name</th><th>ID</th><th>Score</th><th>Level</th><th>Placement</th><th>Time</th></tr></thead>
+        <tbody id="dash-ranking-tbody"><tr><td colspan="7" style="text-align:center;padding:40px;color:#475569;">Loading...</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ══ RUNTIME ══
+var L=['A','B','C','D'];
+var TOTAL=60*60;             // 60 minutes
+var cur=0,score=0,cor=0,wrn=0,tLeft=TOTAL,tInt=null;
+var answers=[],chosen=[],orderedQ=[],timeSpent=[];
+var lastIdx=-1,qEnterTime=null;
+var participant={name:'',id:'',dept:'',role:''};
+var loggedEmployee=null;
+
+var secNames={listen:'Listening',read:'Reading',lang:'Language Use'};
+var secParts={listen:'Section I: Listening',read:'Section II: Reading',lang:'Section III: Language Use'};
+var cardCls={listen:'listen-card',read:'read-card',lang:'lang-card'};
+var tagCls={listen:'st-listen',read:'st-read',lang:'st-lang'};
+
+(function init(){
+  document.title=QUIZ_CONFIG.title;
+  document.getElementById('login-title').textContent=QUIZ_CONFIG.title;
+  document.getElementById('login-sub').textContent=QUIZ_CONFIG.subtitle;
+  document.getElementById('login-org').textContent=QUIZ_CONFIG.organization;
+  document.getElementById('cert-org-top').textContent=QUIZ_CONFIG.organization;
+  document.getElementById('audio-src').src=QUIZ_CONFIG.audio_url;
+  document.getElementById('login-logo').innerHTML='<img src="'+LOGO_DATA_URI+'" alt="logo">';
+  document.getElementById('cert-logo').innerHTML='<img src="'+LOGO_DATA_URI+'" alt="logo">';
+})();
+
+function pad(n){return n<10?'0'+n:String(n);}
+function fmtTime(s){var h=Math.floor(s/3600),m=Math.floor((s%3600)/60),x=s%60;return h>0?pad(h)+':'+pad(m)+':'+pad(x):pad(m)+':'+pad(x);}
+function showScreen(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+function shuffle(a){var r=a.slice();for(var i=r.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=r[i];r[i]=r[j];r[j]=t;}return r;}
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// ── Placement lookup ──
+function getPlacement(rawScore){
+  for(var i=0;i<PLACEMENT_SCALE.length;i++){
+    if(rawScore>=PLACEMENT_SCALE[i].min && rawScore<=PLACEMENT_SCALE[i].max) return PLACEMENT_SCALE[i];
+  }
+  return {rating:0, placement:'Below Intro level'};
+}
+
+// ── Login ──
+function doLogin(){
+  var id=document.getElementById('login-empid').value.trim();
+  var pw=document.getElementById('login-pass').value.trim();
+  var err=document.getElementById('login-error');
+  var btn=document.getElementById('login-btn');
+  if(!id||!pw){err.textContent='Please enter your ID and password';err.style.display='block';return;}
+  btn.disabled=true;btn.textContent='Verifying...';err.style.display='none';
+  dbLogin(id,pw).then(function(emp){
+    loggedEmployee=emp;btn.disabled=false;btn.textContent='Sign In \u2192';
+    return dbCheckDuplicate(emp.employee_id,QUIZ_CONFIG.quiz_code);
+  }).then(function(isDup){
+    if(isDup){alert('You have already taken this test. It cannot be retaken.');return;}
+    showRules();
+  }).catch(function(e){
+    err.textContent=e.message;err.style.display='block';
+    btn.disabled=false;btn.textContent='Sign In \u2192';
+  });
+}
+function doLogout(){loggedEmployee=null;document.getElementById('login-empid').value='';document.getElementById('login-pass').value='';showScreen('login-screen');}
+
+function showRules(){
+  showScreen('rules-screen');
+  document.getElementById('emp-badge').textContent='\uD83D\uDC64 '+loggedEmployee.full_name+' | '+loggedEmployee.employee_id;
+  var cb=document.getElementById('consent-checkbox');cb.checked=false;
+  var b=document.getElementById('start-exam-btn');b.disabled=true;b.style.opacity='0.5';
+}
+
+// ── Begin ──
+function beginQuiz(){
+  if(!document.getElementById('consent-checkbox').checked){alert('Please agree to the instructions first');return;}
+  participant={name:loggedEmployee.full_name,id:loggedEmployee.employee_id,dept:loggedEmployee.department||'',role:loggedEmployee.role||''};
+  cur=0;score=0;cor=0;wrn=0;tLeft=TOTAL;lastIdx=-1;qEnterTime=null;
+
+  // Listening stays in fixed order (matches audio timeline).
+  // Reading keeps passages grouped; Language is fully shuffled.
+  var listenPart = Q_LISTENING.slice();
+
+  var byPassage={};
+  Q_READING.forEach(function(q){ (byPassage[q.passageTitle]=byPassage[q.passageTitle]||[]).push(q); });
+  var readPart=[];
+  shuffle(Object.keys(byPassage)).forEach(function(k){ byPassage[k].forEach(function(q){ readPart.push(q); }); });
+
+  var langPart = shuffle(Q_LANGUAGE);
+
+  orderedQ = listenPart.concat(readPart).concat(langPart).map(function(q){
+    return {s:q.s,q:q.q,c:shuffle(q.c),a:q.a,qid:q.qid,situation:q.situation||'',passageTitle:q.passageTitle||'',passage:q.passage||''};
+  });
+
+  var n=orderedQ.length;
+  answers=new Array(n).fill(null);chosen=new Array(n).fill(null);timeSpent=new Array(n).fill(0);
+  document.getElementById('q-total').textContent=n;
+  document.getElementById('cand-badge').innerHTML='\uD83D\uDC64 '+escHtml(participant.name)+' &nbsp;|&nbsp; \uD83C\uDD94 '+escHtml(participant.id);
+  showScreen('quiz-screen');
+  startTimer();renderQ();renderNav();
+}
+
+function startTimer(){
+  clearInterval(tInt);updateTimer();
+  tInt=setInterval(function(){tLeft--;updateTimer();if(tLeft<=0){clearInterval(tInt);document.getElementById('to-overlay').style.display='flex';}},1000);
+}
+function updateTimer(){
+  document.getElementById('t-num').textContent=fmtTime(tLeft);
+  var p=document.getElementById('g-timer'),r=tLeft/TOTAL;
+  p.className='g-timer '+(r>0.33?'ok':r>0.15?'warn':'danger');
+}
+function handleTimeout(){document.getElementById('to-overlay').style.display='none';confirmSubmit();}
+
+function recordTime(){
+  if(qEnterTime!==null&&lastIdx>=0&&lastIdx<timeSpent.length){
+    timeSpent[lastIdx]=(timeSpent[lastIdx]||0)+(Date.now()-qEnterTime)/1000;
+  }
+}
+
+function renderQ(){
+  recordTime();lastIdx=cur;qEnterTime=Date.now();
+
+  var q=orderedQ[cur],n=orderedQ.length;
+  var pct=Math.round(((cur+1)/n)*100);
+  document.getElementById('q-num').textContent=cur+1;
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-pct').textContent=pct+'%';
+  document.getElementById('prog-sec').textContent=secParts[q.s];
+
+  var tag=document.getElementById('sec-tag');
+  tag.textContent='\u25C6 '+secNames[q.s];
+  tag.className='sec-tag '+tagCls[q.s];
+
+  // Audio only during listening section
+  document.getElementById('audio-card').style.display = (q.s==='listen') ? 'block' : 'none';
+
+  // Context blocks
+  var ctx=document.getElementById('context-card'), pas=document.getElementById('passage-card');
+  if(q.s==='listen'&&q.situation){
+    ctx.style.display='block';pas.style.display='none';
+    document.getElementById('ctx-label').textContent='SITUATION';
+    document.getElementById('ctx-body').textContent=q.situation;
+  } else if(q.s==='read'&&q.passage){
+    pas.style.display='block';ctx.style.display='none';
+    document.getElementById('p-title').textContent=q.passageTitle;
+    document.getElementById('p-body').textContent=q.passage;
+  } else { ctx.style.display='none';pas.style.display='none'; }
+
+  document.getElementById('q-card').className='q-card '+cardCls[q.s];
+  document.getElementById('q-n-lbl').textContent='QUESTION '+(cur+1);
+  document.getElementById('q-text').textContent=q.q;
+
+  var wrap=document.getElementById('choices');wrap.innerHTML='';
+  q.c.forEach(function(ch,i){
+    var b=document.createElement('button');
+    b.className='choice'+(ch===chosen[cur]?' selected':'');
+    b.innerHTML='<span class="ltr">'+L[i]+'</span><span>'+escHtml(ch)+'</span>';
+    b.onclick=(function(c,el){return function(){pick(c,el);};})(ch,b);
+    wrap.appendChild(b);
+  });
+
+  document.getElementById('prev-btn').disabled=(cur===0);
+  document.getElementById('next-btn').textContent=(cur===n-1)?'Submit Test':'Next \u2192';
+  updateCount();
+}
+
+function pick(choice,btn){
+  var q=orderedQ[cur];
+  document.querySelectorAll('.choice').forEach(function(b){b.classList.remove('selected');});
+  btn.classList.add('selected');
+  chosen[cur]=choice;
+  answers[cur]=(choice===q.a)?'correct':'wrong';
+  renderNav();updateCount();
+}
+
+function updateCount(){
+  var a=chosen.filter(function(c){return c!==null;}).length;
+  document.getElementById('answered-count').textContent=a+' of '+orderedQ.length+' answered';
+}
+
+function nextQ(){if(cur===orderedQ.length-1){showConfirmModal();return;}cur++;renderQ();renderNav();window.scrollTo({top:0,behavior:'smooth'});}
+function prevQ(){if(cur===0)return;cur--;renderQ();renderNav();window.scrollTo({top:0,behavior:'smooth'});}
+
+function renderNav(){
+  var g=document.getElementById('q-nav-grid');g.innerHTML='';
+  for(var i=0;i<orderedQ.length;i++){
+    var b=document.createElement('button');
+    b.className='qn-btn '+(i===cur?'current':chosen[i]?'answered':'unanswered');
+    b.textContent=i+1;
+    b.onclick=(function(idx){return function(){cur=idx;renderQ();renderNav();window.scrollTo({top:0,behavior:'smooth'});};})(i);
+    g.appendChild(b);
+  }
+}
+
+function showConfirmModal(){
+  var a=chosen.filter(function(c){return c!==null;}).length;
+  var u=orderedQ.length-a;
+  document.getElementById('conf-answered').textContent=a;
+  document.getElementById('conf-unanswered').textContent=u;
+  var ul=document.getElementById('unanswered-list');
+  if(u>0){
+    var nums=[];chosen.forEach(function(c,i){if(c===null)nums.push('Q'+(i+1));});
+    ul.textContent='Unanswered: '+nums.join(', ');ul.style.display='block';
+    document.getElementById('confirm-msg').textContent='You have '+u+' unanswered question(s). Submit anyway?';
+  } else {
+    ul.style.display='none';
+    document.getElementById('confirm-msg').textContent='You have answered all questions. Submit your test?';
+  }
+  document.getElementById('confirm-modal').style.display='flex';
+}
+function closeConfirmModal(){document.getElementById('confirm-modal').style.display='none';}
+function confirmSubmit(){document.getElementById('confirm-modal').style.display='none';showResult();}
+
+function showResult(){
+  clearInterval(tInt);recordTime();
+  try{ document.getElementById('listen-audio').pause(); }catch(e){}
+  score=0;cor=0;wrn=0;
+  answers.forEach(function(a){
+    if(a==='correct'){score+=QUIZ_CONFIG.scoring.correct;cor++;}
+    else if(a==='wrong'){score+=QUIZ_CONFIG.scoring.wrong;wrn++;}
+  });
+  showScreen('result-screen');
+  document.getElementById('r-name-badge').textContent='\uD83D\uDC64 '+participant.name+' | '+participant.id;
+  var pct=Math.round((cor/orderedQ.length)*100);
+  saveToSupabase(pct,TOTAL-tLeft);
+}
+
+function saveToSupabase(pct,used){
+  var ss=document.getElementById('save-status');
+  document.getElementById('saving-overlay').style.display='flex';
+  var sid=Date.now()+'-'+Math.random().toString(36).substr(2,6);
+  var place=getPlacement(cor);
+
+  var rows=orderedQ.map(function(q,i){
+    return {
+      submission_id:sid,name:participant.name,employee_id:participant.id||null,
+      department:participant.dept||null,role:participant.role||null,
+      score:score,correct:cor,wrong:wrn,unanswered:orderedQ.length-cor-wrn,
+      percentage:pct,time_used:fmtTime(used),quiz_code:QUIZ_CONFIG.quiz_code,
+      question_number:i+1,question_id:q.qid||null,
+      question_text:q.q.substring(0,500),
+      question_type:q.s==='listen'?'Listening':q.s==='read'?'Reading':'Language Use',
+      chosen_answer:chosen[i]||'Not answered',correct_answer:q.a,
+      is_correct:answers[i]==='correct',
+      time_spent_seconds:Math.round(timeSpent[i]||0),
+      placement_level:place.rating,
+      placement_text:place.placement
+    };
+  });
+
+  dbInsert(rows)
+    .then(function(){return dbLogSubmission(participant.id,QUIZ_CONFIG.quiz_code);})
+    .then(function(){
+      document.getElementById('saving-overlay').style.display='none';
+      ss.className='save-status success';ss.textContent='\u2705 Results saved successfully!';ss.style.display='block';
+    })
+    .catch(function(e){
+      document.getElementById('saving-overlay').style.display='none';
+      ss.className='save-status error';ss.textContent='\u274C Save error: '+e.message;ss.style.display='block';
+    });
+}
+
+function showCertificate(){
+  var place=getPlacement(cor);
+  var pct=Math.round((cor/orderedQ.length)*100);
+  document.getElementById('cert-name').textContent=participant.name;
+  document.getElementById('cert-sub').textContent=[participant.role,participant.dept].filter(Boolean).join(' | ')||QUIZ_CONFIG.organization;
+  document.getElementById('cert-quiz-title').textContent=QUIZ_CONFIG.title;
+  document.getElementById('cert-placement').textContent=place.placement;
+  document.getElementById('cert-rating').textContent='Rating Level '+place.rating+' of 12';
+  document.getElementById('cert-score').textContent=cor+'/'+orderedQ.length;
+  document.getElementById('cert-pct').textContent=pct+'%';
+  document.getElementById('cert-time').textContent=fmtTime(TOTAL-tLeft);
+  document.getElementById('cert-date').textContent='Test Date: '+new Date().toLocaleDateString('en-GB',{year:'numeric',month:'long',day:'numeric'});
+
+  var stats={};
+  orderedQ.forEach(function(q,i){
+    if(!stats[q.s])stats[q.s]={t:0,c:0};
+    stats[q.s].t++;
+    if(answers[i]==='correct')stats[q.s].c++;
+  });
+  var html='';
+  ['listen','read','lang'].forEach(function(k){
+    if(stats[k]) html+='<div class="cert-bd-row"><span class="cbr-label">'+secNames[k]+'</span><span class="cbr-score">'+stats[k].c+' / '+stats[k].t+'</span></div>';
+  });
+  html+='<div class="cert-bd-total"><span>\u2726 Total</span><span>'+cor+' / '+orderedQ.length+'</span></div>';
+  document.getElementById('cert-breakdown').innerHTML=html;
+  document.getElementById('cert-modal').style.display='flex';
+}
+
+function restart(){
+  clearInterval(tInt);
+  document.getElementById('save-status').style.display='none';
+  showScreen('login-screen');
+}
+
+// ══ DASHBOARD ══
+var ADMIN_PASS=QUIZ_CONFIG.admin_pass;
+var dashResults=[],dashEmployees=[],currentTab='results';
+
+function openDashboard(){
+  var p=prompt('\uD83D\uDD12 Admin password:');
+  if(p===null)return;
+  if(p!==ADMIN_PASS){alert('Incorrect password');return;}
+  showScreen('dash-screen');loadDashboard();
+}
+function switchDashTab(t){
+  currentTab=t;
+  ['results','pending','ranking'].forEach(function(x){
+    document.getElementById('tab-'+x).classList.toggle('active',t===x);
+    document.getElementById(x+'-table-wrap').style.display=(t===x)?'block':'none';
+  });
+  renderDashboardView();
+}
+function loadDashboard(){
+  Promise.all([dbSelect(),dbGetAllEmployees()]).then(function(r){
+    dashResults=r[0];dashEmployees=r[1];
+    document.getElementById('total-badge').textContent=dashResults.length+' candidates';
+    document.getElementById('sum-total').textContent=dashResults.length;
+    if(dashResults.length){
+      var sc=dashResults.map(function(x){return x.correct||0;});
+      var avg=Math.round(sc.reduce(function(a,b){return a+b;},0)/sc.length);
+      document.getElementById('sum-avg').textContent=avg;
+      document.getElementById('sum-best').textContent=Math.max.apply(null,sc);
+      var lvls=dashResults.map(function(x){return x.placement_level||getPlacement(x.correct||0).rating;});
+      document.getElementById('sum-lvl').textContent=(lvls.reduce(function(a,b){return a+b;},0)/lvls.length).toFixed(1);
+    } else {['sum-avg','sum-best','sum-lvl'].forEach(function(i){document.getElementById(i).textContent='\u2014';});}
+    renderDashboardView();
+  }).catch(function(e){
+    document.getElementById('dash-tbody').innerHTML='<tr><td colspan="8" style="color:#fca5a5;padding:20px;">Error: '+e.message+'</td></tr>';
+  });
+}
+function renderDashboardView(){
+  var term=(document.getElementById('dash-search').value||'').trim().toLowerCase();
+  var done={};dashResults.forEach(function(r){if(r.employee_id)done[r.employee_id]=true;});
+  var pending=dashEmployees.filter(function(e){return !done[e.employee_id];});
+  document.getElementById('tab-results-count').textContent=dashResults.length;
+  document.getElementById('tab-pending-count').textContent=pending.length;
+
+  function match(n,i){return !term||(n||'').toLowerCase().includes(term)||(i||'').toLowerCase().includes(term);}
+
+  if(currentTab==='results'){
+    renderResults(dashResults.filter(function(r){return match(r.name,r.employee_id);}));
+  } else if(currentTab==='pending'){
+    renderPending(pending.filter(function(e){return match(e.full_name,e.employee_id);}));
+  } else {
+    renderRanking(dashResults.filter(function(r){return match(r.name,r.employee_id);}));
+  }
+}
+function lvlClass(l){return l>=9?'lvl-high':l>=5?'lvl-mid':'lvl-low';}
+function renderResults(rows){
+  if(!rows.length){document.getElementById('dash-tbody').innerHTML='<tr><td colspan="8"><div class="empty-state"><span class="empty-icon">\uD83D\uDCED</span><p>No results</p></div></td></tr>';return;}
+  var h='';
+  rows.forEach(function(r,i){
+    var lvl=r.placement_level||getPlacement(r.correct||0).rating;
+    var txt=r.placement_text||getPlacement(r.correct||0).placement;
+    var d=r.submitted_at?r.submitted_at.replace('T',' ').substring(0,16):'\u2014';
+    h+='<tr><td style="color:#475569">'+(i+1)+'</td><td><strong>'+escHtml(r.name||'\u2014')+'</strong></td>'+
+       '<td style="color:#94a3b8;font-size:12px">'+escHtml(r.employee_id||'\u2014')+'</td>'+
+       '<td><strong>'+(r.correct||0)+'</strong>/70</td>'+
+       '<td><span class="lvl-badge '+lvlClass(lvl)+'">Level '+lvl+'</span></td>'+
+       '<td style="font-size:12px;color:#cbd5e1">'+escHtml(txt)+'</td>'+
+       '<td style="color:#94a3b8;font-size:12px">'+escHtml(r.time_used||'\u2014')+'</td>'+
+       '<td style="color:#475569;font-size:11px">'+escHtml(d)+'</td></tr>';
+  });
+  document.getElementById('dash-tbody').innerHTML=h;
+}
+function renderPending(rows){
+  if(!rows.length){document.getElementById('dash-pending-tbody').innerHTML='<tr><td colspan="5"><div class="empty-state"><span class="empty-icon">\uD83C\uDF89</span><p>Everyone has taken the test!</p></div></td></tr>';return;}
+  var h='';
+  rows.forEach(function(e,i){
+    h+='<tr><td style="color:#475569">'+(i+1)+'</td><td><strong>'+escHtml(e.full_name||'\u2014')+'</strong></td>'+
+       '<td style="color:#94a3b8;font-size:12px">'+escHtml(e.employee_id||'\u2014')+'</td>'+
+       '<td style="font-size:12px;color:#cbd5e1">'+escHtml(e.department||'\u2014')+'</td>'+
+       '<td style="font-size:12px;color:#cbd5e1">'+escHtml(e.role||'\u2014')+'</td></tr>';
+  });
+  document.getElementById('dash-pending-tbody').innerHTML=h;
+}
+function renderRanking(rows){
+  function secs(t){if(!t)return Infinity;var p=t.split(':').map(Number);return p.length===3?p[0]*3600+p[1]*60+p[2]:p.length===2?p[0]*60+p[1]:Infinity;}
+  rows=rows.slice().sort(function(a,b){
+    if((b.correct||0)!==(a.correct||0))return (b.correct||0)-(a.correct||0);
+    return secs(a.time_used)-secs(b.time_used);
+  });
+  if(!rows.length){document.getElementById('dash-ranking-tbody').innerHTML='<tr><td colspan="7"><div class="empty-state"><span class="empty-icon">\uD83C\uDFC6</span><p>No data</p></div></td></tr>';return;}
+  var medals=['\uD83E\uDD47','\uD83E\uDD48','\uD83E\uDD49'];
+  var h='';
+  rows.forEach(function(r,i){
+    var lvl=r.placement_level||getPlacement(r.correct||0).rating;
+    var txt=r.placement_text||getPlacement(r.correct||0).placement;
+    var rank=i<3?medals[i]+' '+(i+1):(i+1);
+    h+='<tr'+(i<3?' style="background:rgba(103,232,249,.06)"':'')+'>'+
+       '<td style="font-weight:900;color:'+(i<3?'#67e8f9':'#64748b')+';font-size:'+(i<3?'15px':'13px')+'">'+rank+'</td>'+
+       '<td><strong>'+escHtml(r.name||'\u2014')+'</strong></td>'+
+       '<td style="color:#94a3b8;font-size:12px">'+escHtml(r.employee_id||'\u2014')+'</td>'+
+       '<td><strong>'+(r.correct||0)+'</strong>/70</td>'+
+       '<td><span class="lvl-badge '+lvlClass(lvl)+'">Level '+lvl+'</span></td>'+
+       '<td style="font-size:12px;color:#cbd5e1">'+escHtml(txt)+'</td>'+
+       '<td style="color:#94a3b8;font-size:12px">'+escHtml(r.time_used||'\u2014')+'</td></tr>';
+  });
+  document.getElementById('dash-ranking-tbody').innerHTML=h;
+}
+
+function exportExcel(){
+  var btn=document.querySelector('[onclick="exportExcel()"]');
+  btn.textContent='\u23F3 Exporting...';btn.disabled=true;
+  dbSelectAll().then(function(all){
+    if(!all.length){alert('No data');btn.textContent='\uD83D\uDCE5 Export Excel';btn.disabled=false;return;}
+    var subs={},qidText={},types={};
+    all.forEach(function(r){
+      var sid=r.submission_id;
+      if(!subs[sid])subs[sid]={meta:r,ans:{},stats:{},times:[]};
+      var qid=r.question_id||('pos'+r.question_number);
+      subs[sid].ans[qid]=r.chosen_answer||'Not answered';
+      if(!qidText[qid])qidText[qid]=r.question_text||qid;
+      var t=r.question_type||'Other';types[t]=true;
+      if(!subs[sid].stats[t])subs[sid].stats[t]={t:0,c:0};
+      subs[sid].stats[t].t++;if(r.is_correct)subs[sid].stats[t].c++;
+      if(r.time_spent_seconds!=null)subs[sid].times.push(r.time_spent_seconds);
+    });
+    var allTypes=Object.keys(types);
+    var order={listen:0,read:1,lang:2};
+    var qids=Object.keys(qidText).sort(function(a,b){
+      var pa=a.split('_'),pb=b.split('_');
+      var ga=order[pa[0]]!=null?order[pa[0]]:9,gb=order[pb[0]]!=null?order[pb[0]]:9;
+      if(ga!==gb)return ga-gb;
+      return (parseInt(pa[1],10)||0)-(parseInt(pb[1],10)||0);
+    });
+
+    var BOM='\uFEFF';
+    var head=['"Timestamp"','"Name"','"ID"','"Department"','"Role"','"Raw Score"','"Correct"','"Wrong"','"Unanswered"','"Percentage"','"Placement Level"','"Placement"','"Time Used"','"Avg Sec/Q"']
+      .concat(allTypes.map(function(t){return '"'+t+' (Correct/Total)"';}))
+      .concat(qids.map(function(q){return '"'+q+': '+(qidText[q]||'').substring(0,60).replace(/"/g,'""')+'"';}));
+    var lines=[head.join(',')];
+
+    Object.keys(subs).forEach(function(sid){
+      var s=subs[sid],m=s.meta;
+      var lvl=m.placement_level||getPlacement(m.correct||0).rating;
+      var txt=m.placement_text||getPlacement(m.correct||0).placement;
+      var avgT=s.times.length?Math.round(s.times.reduce(function(a,b){return a+b;},0)/s.times.length):'';
+      var row=['"'+(m.submitted_at||'').replace('T',' ').substring(0,19)+'"',
+        '"'+(m.name||'').replace(/"/g,'""')+'"','"'+(m.employee_id||'').replace(/"/g,'""')+'"',
+        '"'+(m.department||'').replace(/"/g,'""')+'"','"'+(m.role||'').replace(/"/g,'""')+'"',
+        m.score||0,m.correct||0,m.wrong||0,m.unanswered||0,(m.percentage||0)+'%',
+        lvl,'"'+txt.replace(/"/g,'""')+'"','"'+(m.time_used||'')+'"',avgT]
+        .concat(allTypes.map(function(t){var st=s.stats[t];return st?'="'+st.c+'/'+st.t+'"':'="0/0"';}))
+        .concat(qids.map(function(q){var a=s.ans[q];return a!==undefined?'"'+a.replace(/"/g,'""')+'"':'""';}));
+      lines.push(row.join(','));
+    });
+
+    var blob=new Blob([BOM+lines.join('\n')],{type:'text/csv;charset=utf-8;'});
+    var url=URL.createObjectURL(blob),a=document.createElement('a'),d=new Date();
+    a.href=url;a.download='placement_results_'+d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'.csv';a.click();
+    URL.revokeObjectURL(url);
+    btn.textContent='\uD83D\uDCE5 Export Excel';btn.disabled=false;
+  }).catch(function(e){alert('Error: '+e.message);btn.textContent='\uD83D\uDCE5 Export Excel';btn.disabled=false;});
+}
+</script>
+</body>
+</html>
